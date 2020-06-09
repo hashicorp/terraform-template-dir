@@ -7,7 +7,7 @@ template files.
 
 ```hcl
 module "template_files" {
-  source = "apparentlymart/dir/template"
+  source = "hashicorp/dir/template"
 
   base_dir = "${path.module}/src"
   template_vars = {
