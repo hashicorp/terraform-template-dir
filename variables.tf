@@ -31,7 +31,7 @@ variable "file_types" {
     ".jpeg"   = "image/jpeg"
     ".jpg"    = "image/jpeg"
     ".png"    = "image/png"
-    ".svg"    = "image/svg"
+    ".svg"    = "image/svg+xml"
     ".webp"   = "image/webp"
     ".weba"   = "audio/webm"
     ".webm"   = "video/webm"
