@@ -24,6 +24,7 @@ variable "file_types" {
     ".xhtml"  = "application/xhtml+xml"
     ".css"    = "text/css; charset=utf-8"
     ".js"     = "application/javascript"
+    ".wasm"   = "application/wasm"
     ".xml"    = "application/xml"
     ".json"   = "application/json"
     ".jsonld" = "application/ld+json"
