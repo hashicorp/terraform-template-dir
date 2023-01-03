@@ -1,0 +1,19 @@
+plan {
+  response "default" {
+    content {
+      id = unknown(string)
+
+      timeouts {}
+    }
+  }
+}
+
+apply {
+  response "default" {
+    content {
+      id = planned_state.bucket
+
+      timeouts {}
+    }
+  }
+}

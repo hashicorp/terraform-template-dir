@@ -1,0 +1,28 @@
+
+step "eval" {
+  variables = {
+    # FIXME: The test scenario language doesn't offer a way to interpolate
+    # the path to the directory containing this .tftest file, and so we
+    # need to specify this base_dir relative to the current working directory,
+    # which we assume will be the main directory for the module under test.
+    base_dir = "test-scenarios/src"
+    template_vars = {
+      name = "Josephine"
+    }
+  }
+
+  postcondition {
+    condition     = length(outputs.files) == 4
+    error_message = format("wrong number of files %d; want %d", length(outputs.files), 4)
+  }
+
+  postcondition {
+    condition     = outputs.files["static.txt"].content_type == "text/plain; charset=utf-8"
+    error_message = format("static.txt has wrong content type %#v", outputs.files["static.txt"].content_type)
+  }
+
+  postcondition {
+    condition     = outputs.files["templated.txt"].content == "Hello Josephine!\n"
+    error_message = format("templated.txt has wrong content %#v", outputs.files["templated.txt"].content)
+  }
+}

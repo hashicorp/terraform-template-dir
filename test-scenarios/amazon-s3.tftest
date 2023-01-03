@@ -1,0 +1,21 @@
+
+required_providers {
+  aws = {
+    source = "hashicorp/aws"
+  }
+}
+
+mock_provider "aws" {
+  config = "./aws-mock"
+}
+
+step "create" {
+  # This particular step needs some extra supporting resources that
+  # are not part of the main module, so we use a wrapping module
+  # rather than calling the module under test directly.
+  module = "./amazon-s3"
+
+  providers = {
+    aws = aws
+  }
+}

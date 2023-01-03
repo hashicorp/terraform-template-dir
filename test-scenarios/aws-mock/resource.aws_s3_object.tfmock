@@ -1,0 +1,18 @@
+
+plan {
+  response "default" {
+    content {
+      id = unknown(string)
+    }
+  }
+}
+
+apply {
+  response "default" {
+    content {
+      # FIXME: Not sure what the real provider actually writes in here.
+      id = "something-something"
+    }
+  }
+}
+

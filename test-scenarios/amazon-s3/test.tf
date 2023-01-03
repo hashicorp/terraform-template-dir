@@ -7,21 +7,16 @@ module "template_files" {
   }
 }
 
-provider "aws" {
-  region = "us-west-2"
-}
-
-resource "random_string" "suffix" {
-  length  = 8
-  special = false
-  upper   = false
-}
-
 resource "aws_s3_bucket" "static_files" {
-  bucket = "terraform-template-dir-test-${random_string.suffix.result}"
+  bucket = "terraform-template-dir-test"
+
+  # FIXME: The provider mock mechanism doesn't know how to represent this
+  # not being present at all, so we'll define it here just to quiet that
+  # limitation for now.
+  timeouts {}
 }
 
-resource "aws_s3_bucket_object" "static_files" {
+resource "aws_s3_object" "static_files" {
   for_each = module.template_files.files
 
   bucket       = aws_s3_bucket.static_files.bucket
