@@ -1,3 +1,6 @@
+# Copyright (c) HashiCorp, Inc.
+# SPDX-License-Identifier: MIT
+
 locals {
   all_file_paths = fileset(var.base_dir, "**")
   static_file_paths = toset([

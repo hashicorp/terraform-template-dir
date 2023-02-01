@@ -1,3 +1,6 @@
+# Copyright (c) HashiCorp, Inc.
+# SPDX-License-Identifier: MIT
+
 output "files" {
   value       = local.files
   description = "Map from relative file paths to objects describing all of the files. See the module README for more information."
