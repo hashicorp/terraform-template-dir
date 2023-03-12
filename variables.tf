@@ -48,6 +48,7 @@ variable "file_types" {
     ".eot"    = "application/vnd.ms-fontobject"
     ".woff"   = "font/woff"
     ".woff2"  = "font/woff2"
+    ".wasm"   = "application/wasm"
   }
   description = "Map from file suffixes, which must begin with a period and contain no periods, to the corresponding Content-Type values."
 }
