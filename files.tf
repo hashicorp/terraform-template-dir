@@ -20,7 +20,7 @@ locals {
   output_file_paths = setunion(keys(local.template_file_paths), local.static_file_paths)
 
   file_suffix_matches = {
-    for p in local.output_file_paths : p => regexall("\\.[^\\.]+\\z", p)
+    for p in local.output_file_paths : p => regexall("\\.[^\\.]+\\z", length(regexall("\\.gz$", p)) > 0 ? replace(p, ".gz", "") : p)
   }
   file_suffixes = {
     for p, ms in local.file_suffix_matches : p => length(ms) > 0 ? ms[0] : ""
@@ -32,9 +32,10 @@ locals {
   files = merge(
     {
       for p in keys(local.template_file_paths) : p => {
-        content_type = local.file_types[p]
-        source_path  = tostring(null)
-        content      = local.template_file_contents[p]
+        content_type     = local.file_types[p]
+        content_encoding = length(regexall("\\.gz$", p)) > 0 ? "gzip" : null
+        source_path      = tostring(null)
+        content          = local.template_file_contents[p]
         digests = tomap({
           md5          = md5(local.template_file_contents[p])
           sha1         = sha1(local.template_file_contents[p])
@@ -47,9 +48,10 @@ locals {
     },
     {
       for p in local.static_file_paths : p => {
-        content_type = local.file_types[p]
-        source_path  = local.static_file_local_paths[p]
-        content      = tostring(null)
+        content_type     = local.file_types[p]
+        content_encoding = length(regexall("\\.gz$", p)) > 0 ? "gzip" : null
+        source_path      = local.static_file_local_paths[p]
+        content          = tostring(null)
         digests = tomap({
           md5          = filemd5(local.static_file_local_paths[p])
           sha1         = filesha1(local.static_file_local_paths[p])
