@@ -48,6 +48,11 @@ interpreted as a template. You can override that suffix by setting the
 variable `template_file_suffix` to any string that starts with a period and
 is followed by one or more non-period characters.
 
+If a file named example.json and a template file named example.json.tmpl are both present, the module will use the static file by default.
+This behavior can be controlled using the erase_existing_file variable: 
+- If erase_existing_file = false (default), the template will be ignored if a static file with the same name (without suffix) exists.
+- If erase_existing_file = true, the template file will be used instead, overwriting the static file with the same name in the output.
+
 The templates are interpreted as
 [Terraform's string template syntax](https://www.terraform.io/docs/configuration/expressions.html#string-templates). Templates can use any of
 [Terraform's built-in functions](https://www.terraform.io/docs/configuration/functions.html) except
