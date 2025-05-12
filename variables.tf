@@ -57,3 +57,9 @@ variable "default_file_type" {
   default     = "application/octet-stream"
   description = "The Content-Type value to use for any files that don't match one of the suffixes given in file_types."
 }
+
+variable "erase_existing_files" {
+  description = "If true, template files overwrite static files with the same name"
+  type        = bool
+  default     = false
+}
