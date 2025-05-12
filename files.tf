@@ -2,7 +2,18 @@ locals {
   all_file_paths = fileset(var.base_dir, "**")
   static_file_paths = toset([
     for p in local.all_file_paths : p
-    if length(p) < length(var.template_file_suffix) || substr(p, length(p) - length(var.template_file_suffix), length(var.template_file_suffix)) != var.template_file_suffix
+    if (
+      length(p) < length(var.template_file_suffix)
+      || substr(p, length(p) - length(var.template_file_suffix), length(var.template_file_suffix)) != var.template_file_suffix
+    )
+    && (
+      var.erase_existing_files == false
+      || !contains([
+        for tp in local.all_file_paths :
+        substr(tp, 0, length(tp) - length(var.template_file_suffix))
+        if substr(tp, length(tp) - length(var.template_file_suffix), length(var.template_file_suffix)) == var.template_file_suffix
+      ], p)
+    )
   ])
   template_file_paths = {
     for p in local.all_file_paths :
