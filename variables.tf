@@ -1,3 +1,5 @@
+# Copyright IBM Corp. 2019, 2026
+
 variable "base_dir" {
   type        = string
   description = "The base directory in which this module will search for static files and templates."
