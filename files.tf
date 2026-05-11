@@ -1,3 +1,5 @@
+# Copyright IBM Corp. 2019, 2026
+
 locals {
   all_file_paths = fileset(var.base_dir, "**")
   static_file_paths = toset([

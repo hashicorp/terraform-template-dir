@@ -1,3 +1,5 @@
+# Copyright IBM Corp. 2019, 2026
+
 output "files" {
   value       = local.files
   description = "Map from relative file paths to objects describing all of the files. See the module README for more information."
