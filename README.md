@@ -38,7 +38,7 @@ the result of applying the named hash function to the file contents:
 * `sha1`
 * `sha256`
 * `base64sha256`
-* `base512`
+* `sha512`
 * `base64sha512`
 
 ## Template Files
